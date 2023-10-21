@@ -1,0 +1,421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		180EBD1B2AE12A2C0070CAB0 /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180EBD1A2AE12A2C0070CAB0 /* Mesh.swift */; };
+		180EBD1D2AE12A750070CAB0 /* SCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180EBD1C2AE12A750070CAB0 /* SCNNode.swift */; };
+		1874D5C52ADEAC0E00CA9F03 /* Gate_ViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874D5C42ADEAC0E00CA9F03 /* Gate_ViewerApp.swift */; };
+		1874D5C72ADEAC0E00CA9F03 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874D5C62ADEAC0E00CA9F03 /* AppView.swift */; };
+		1874D5C92ADEAC0F00CA9F03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1874D5C82ADEAC0F00CA9F03 /* Assets.xcassets */; };
+		1874D5CD2ADEAC0F00CA9F03 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1874D5CC2ADEAC0F00CA9F03 /* Preview Assets.xcassets */; };
+		1874D5D62ADEAC6400CA9F03 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874D5D52ADEAC6400CA9F03 /* AppViewModel.swift */; };
+		1874D5DB2ADEACF900CA9F03 /* Gate in Frameworks */ = {isa = PBXBuildFile; productRef = 1874D5DA2ADEACF900CA9F03 /* Gate */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		180EBD1A2AE12A2C0070CAB0 /* Mesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
+		180EBD1C2AE12A750070CAB0 /* SCNNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNNode.swift; sourceTree = "<group>"; };
+		1874D5C12ADEAC0E00CA9F03 /* Gate Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gate Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1874D5C42ADEAC0E00CA9F03 /* Gate_ViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gate_ViewerApp.swift; sourceTree = "<group>"; };
+		1874D5C62ADEAC0E00CA9F03 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		1874D5C82ADEAC0F00CA9F03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1874D5CA2ADEAC0F00CA9F03 /* Gate_Viewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gate_Viewer.entitlements; sourceTree = "<group>"; };
+		1874D5CC2ADEAC0F00CA9F03 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1874D5D52ADEAC6400CA9F03 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		1874D5D82ADEACDE00CA9F03 /* Gate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Gate; path = ..; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1874D5BE2ADEAC0E00CA9F03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1874D5DB2ADEACF900CA9F03 /* Gate in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		180EBD192AE12A230070CAB0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				180EBD1A2AE12A2C0070CAB0 /* Mesh.swift */,
+				180EBD1C2AE12A750070CAB0 /* SCNNode.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1874D5B82ADEAC0E00CA9F03 = {
+			isa = PBXGroup;
+			children = (
+				1874D5D72ADEACDE00CA9F03 /* Packages */,
+				1874D5C32ADEAC0E00CA9F03 /* Gate Viewer */,
+				1874D5C22ADEAC0E00CA9F03 /* Products */,
+				1874D5D92ADEACF900CA9F03 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1874D5C22ADEAC0E00CA9F03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1874D5C12ADEAC0E00CA9F03 /* Gate Viewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1874D5C32ADEAC0E00CA9F03 /* Gate Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				180EBD192AE12A230070CAB0 /* Extensions */,
+				1874D5C42ADEAC0E00CA9F03 /* Gate_ViewerApp.swift */,
+				1874D5D42ADEAC2300CA9F03 /* View Models */,
+				1874D5D32ADEAC1C00CA9F03 /* Views */,
+				1874D5C82ADEAC0F00CA9F03 /* Assets.xcassets */,
+				1874D5CA2ADEAC0F00CA9F03 /* Gate_Viewer.entitlements */,
+				1874D5CB2ADEAC0F00CA9F03 /* Preview Content */,
+			);
+			path = "Gate Viewer";
+			sourceTree = "<group>";
+		};
+		1874D5CB2ADEAC0F00CA9F03 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1874D5CC2ADEAC0F00CA9F03 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1874D5D32ADEAC1C00CA9F03 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1874D5C62ADEAC0E00CA9F03 /* AppView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1874D5D42ADEAC2300CA9F03 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				1874D5D52ADEAC6400CA9F03 /* AppViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		1874D5D72ADEACDE00CA9F03 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				1874D5D82ADEACDE00CA9F03 /* Gate */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		1874D5D92ADEACF900CA9F03 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1874D5C02ADEAC0E00CA9F03 /* Gate Viewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1874D5D02ADEAC0F00CA9F03 /* Build configuration list for PBXNativeTarget "Gate Viewer" */;
+			buildPhases = (
+				1874D5BD2ADEAC0E00CA9F03 /* Sources */,
+				1874D5BE2ADEAC0E00CA9F03 /* Frameworks */,
+				1874D5BF2ADEAC0E00CA9F03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Gate Viewer";
+			packageProductDependencies = (
+				1874D5DA2ADEACF900CA9F03 /* Gate */,
+			);
+			productName = "Gate Viewer";
+			productReference = 1874D5C12ADEAC0E00CA9F03 /* Gate Viewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1874D5B92ADEAC0E00CA9F03 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					1874D5C02ADEAC0E00CA9F03 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 1874D5BC2ADEAC0E00CA9F03 /* Build configuration list for PBXProject "Gate Viewer" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1874D5B82ADEAC0E00CA9F03;
+			productRefGroup = 1874D5C22ADEAC0E00CA9F03 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1874D5C02ADEAC0E00CA9F03 /* Gate Viewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1874D5BF2ADEAC0E00CA9F03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1874D5CD2ADEAC0F00CA9F03 /* Preview Assets.xcassets in Resources */,
+				1874D5C92ADEAC0F00CA9F03 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1874D5BD2ADEAC0E00CA9F03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1874D5C72ADEAC0E00CA9F03 /* AppView.swift in Sources */,
+				180EBD1D2AE12A750070CAB0 /* SCNNode.swift in Sources */,
+				1874D5C52ADEAC0E00CA9F03 /* Gate_ViewerApp.swift in Sources */,
+				180EBD1B2AE12A2C0070CAB0 /* Mesh.swift in Sources */,
+				1874D5D62ADEAC6400CA9F03 /* AppViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1874D5CE2ADEAC0F00CA9F03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1874D5CF2ADEAC0F00CA9F03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		1874D5D12ADEAC0F00CA9F03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Gate Viewer/Gate_Viewer.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Gate Viewer/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gate.Gate-Viewer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1874D5D22ADEAC0F00CA9F03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Gate Viewer/Gate_Viewer.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Gate Viewer/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gate.Gate-Viewer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1874D5BC2ADEAC0E00CA9F03 /* Build configuration list for PBXProject "Gate Viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1874D5CE2ADEAC0F00CA9F03 /* Debug */,
+				1874D5CF2ADEAC0F00CA9F03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1874D5D02ADEAC0F00CA9F03 /* Build configuration list for PBXNativeTarget "Gate Viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1874D5D12ADEAC0F00CA9F03 /* Debug */,
+				1874D5D22ADEAC0F00CA9F03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1874D5DA2ADEACF900CA9F03 /* Gate */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Gate;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 1874D5B92ADEAC0E00CA9F03 /* Project object */;
+}
