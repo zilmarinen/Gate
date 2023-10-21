@@ -11,7 +11,9 @@ import SceneKit
 
 extension Skeleton {
     
-    internal class Torso: SCNNode {
+    internal class Torso: SCNNode,
+                          Bindable,
+                          Meshable {
         
         public override init() {
             
@@ -26,19 +28,21 @@ extension Skeleton {
 
 extension Skeleton.Torso {
     
-    internal func bindPose(build: Skeleton.Build) { position = SCNVector3(0.0, build.length(ratio: .torso), 0.0) }
+    internal func bindPose(height: Skeleton.Height,
+                           shape: Skeleton.Shape) { position = SCNVector3(0.0, height.torsoHeight, 0.0) }
 }
 
 extension Skeleton.Torso {
     
-    internal func mesh(build: Skeleton.Build,
+    internal func mesh(height: Skeleton.Height,
+                       shape: Skeleton.Shape,
                        color: Color) throws -> Mesh {
         
-        guard let line = LineSegment(start: Vector(worldPosition) - Vector(0.0, build.length(ratio: .torso), 0.0),
+        guard let line = LineSegment(start: Vector(worldPosition) - Vector(0.0, height.torsoHeight, 0.0),
                                      end: Vector(worldPosition)) else { throw MeshError.invalidLineSegment }
         
         return try Mesh.cylinder(line: line,
-                                 radius: build.radius,
-                                 color: color)
+                                 radius: shape.upperRadius,
+                                 color: .orange)
     }
 }

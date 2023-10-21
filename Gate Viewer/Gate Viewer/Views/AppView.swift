@@ -55,15 +55,25 @@ struct AppView: View {
     @ViewBuilder
     var toolbar: some View {
         
-        Picker("Build",
-               selection: $viewModel.build) {
-                    
-            ForEach(Skeleton.Build.allCases, id: \.self) { build in
+        Picker("Height",
+               selection: $viewModel.height) {
+            
+            ForEach(Skeleton.Height.allCases, id: \.self) { height in
                         
-                    Text(build.id)
-                            .id(build)
-                }
+                Text(height.id)
+                    .id(height)
             }
+        }
+        
+        Picker("Shape",
+               selection: $viewModel.shape) {
+            
+            ForEach(Skeleton.Shape.allCases, id: \.self) { shape in
+                        
+                Text(shape.id)
+                    .id(shape)
+            }
+        }
         
         Menu {
                                 

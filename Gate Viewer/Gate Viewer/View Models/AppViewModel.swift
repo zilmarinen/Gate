@@ -42,11 +42,21 @@ class AppViewModel: ObservableObject {
         }
     }
     
-    @Published var build: Skeleton.Build = .small {
+    @Published var height: Skeleton.Height = .small {
         
         didSet {
             
-            guard oldValue != build else { return }
+            guard oldValue != height else { return }
+            
+            updateScene()
+        }
+    }
+    
+    @Published var shape: Skeleton.Shape = .cyclinder {
+        
+        didSet {
+            
+            guard oldValue != shape else { return }
             
             updateScene()
         }
@@ -111,7 +121,8 @@ extension AppViewModel {
         
         self.updateSurface()
         
-        let skeleton = Skeleton(build: build)
+        let skeleton = Skeleton(height: height,
+                                shape: shape)
         
         try? skeleton.debug(showBones: showBones,
                             showJoints: showJoints,

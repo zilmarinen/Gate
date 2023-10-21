@@ -11,7 +11,9 @@ import SceneKit
 
 extension Skeleton {
     
-    internal class Limb: SCNNode {
+    internal class Limb: SCNNode,
+                         Bindable,
+                         Meshable {
         
         internal enum Side: String,
                             Identifiable {
@@ -64,24 +66,25 @@ extension Skeleton {
 
 extension Skeleton.Limb {
     
-    internal func bindPose(build: Skeleton.Build) {
+    internal func bindPose(height: Skeleton.Height,
+                           shape: Skeleton.Shape) {
         
         let component = side == .left ? -1.0 : 1.0
-        let limbLength = build.length(ratio: .appendage) / 2.0
+        let limbLength = (appendage == .arm ? height.armLength : height.legLength) / 2.0
         let ikLength = limbLength / 2.0
         
         switch appendage {
             
         case .arm:
             
-            self.position = SCNVector3(build.radius * component, -build.length(ratio: .shoulders), 0.0)
+            self.position = SCNVector3(shape.upperRadius * component, -height.torsoHeight / 2.0, 0.0)
             joint.position = SCNVector3(limbLength * component, 0.0, 0.0)
             extremity.position = SCNVector3(limbLength * component, 0.0, 0.0)
             ik.position = SCNVector3(ikLength * component, 0.0, 0.0)
             
         case .leg:
             
-            self.position = SCNVector3((build.radius / 2.0) * component, -build.length(ratio: .hips), 0.0)
+            self.position = SCNVector3((shape.upperRadius / 2.0) * component, -height.hipHeight, 0.0)
             joint.position = SCNVector3(0.0, -limbLength, 0.0)
             extremity.position = SCNVector3(0.0, -limbLength, 0.0)
             ik.position = SCNVector3(0.0, 0.0, ikLength)
@@ -91,14 +94,30 @@ extension Skeleton.Limb {
 
 extension Skeleton.Limb {
     
-    internal func mesh(build: Skeleton.Build,
+    internal func mesh(height: Skeleton.Height,
+                       shape: Skeleton.Shape,
                        color: Color) throws -> Mesh {
         
-        guard let line = LineSegment(start: Vector(extremity.worldPosition),
+        guard let limb = LineSegment(start: Vector(extremity.worldPosition),
                                      end: Vector(worldPosition)) else { throw MeshError.invalidLineSegment }
         
-        return try Mesh.cap(line: line,
-                            radius: build.limbRadius,
-                            color: color)
+        guard appendage == .arm,
+              let hand = LineSegment(start: Vector(ik.worldPosition),
+                                     end: Vector(extremity.worldPosition)) else {
+            
+            return try Mesh.cap(line: limb,
+                                radius: shape.limbRadius,
+                                color: color)
+        }
+        
+        let arm = try Mesh.cylinder(line: limb,
+                                    radius: shape.limbRadius,
+                                    color: color)
+        
+        let manus = try Mesh.cap(line: hand,
+                                 radius: shape.limbRadius,
+                                 color: .orange)
+        
+        return arm.union(manus)
     }
 }

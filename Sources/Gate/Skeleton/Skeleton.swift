@@ -9,82 +9,9 @@ import Euclid
 import Foundation
 import SceneKit
 
-extension Skeleton {
-    
-    public enum Build: Int,
-                       CaseIterable,
-                       Identifiable {
-        
-        case small
-        case medium
-        case tall
-        
-        public var id: String {
-            
-            switch self {
-                
-            case .small: return "Small"
-            case .medium: return "Medium"
-            case .tall: return "Tall"
-            }
-        }
-        
-        internal var height: Double {
-            
-            switch self {
-                
-            case .small: return 0.3
-            case .medium: return 0.35
-            case .tall: return 0.4
-            }
-        }
-        
-        internal var radius: Double {
-            
-            switch self {
-                
-            case .small: return 0.03
-            case .medium: return 0.04
-            case .tall: return 0.05
-            }
-        }
-        
-        internal var limbRadius: Double { 0.01 }
-    }
-}
-
-extension Skeleton.Build {
-    
-    internal enum Ratio: Int,
-                         CaseIterable {
-        
-        case hair
-        case face
-        case shoulders
-        case torso
-        case hips
-        case appendage //arms and legs are equal length
-        
-        internal var total: Int { Self.allCases.reduce(0) { $0 + $1.component } }
-        
-        internal var component: Int {
-            
-            switch self {
-                
-            case .hair: return 1
-            case .face: return 2
-            case .shoulders: return 1
-            case .torso: return 2
-            case .hips: return 1
-            case .appendage: return 2
-            }
-        }
-    }
-    
-    internal func length(ratio: Ratio) -> Double { (height / Double(ratio.total)) * Double(ratio.component) }
-}
-
-public class Skeleton: SCNNode {
+public class Skeleton: SCNNode,
+                       Bindable,
+                       Meshable {
     
     internal let hair = Hair()
     internal let face = Face()
@@ -101,11 +28,14 @@ public class Skeleton: SCNNode {
     internal let rightHip = Limb(side: .right,
                                  appendage: .leg)
     
-    internal let build: Build
+    internal let height: Height
+    internal let shape: Shape
     
-    public init(build: Build) {
+    public init(height: Height,
+                shape: Shape) {
         
-        self.build = build
+        self.height = height
+        self.shape = shape
         
         super.init()
         
@@ -123,9 +53,12 @@ public class Skeleton: SCNNode {
         
         face.addChildNode(hair)
         
-        bindPose(build: build)
+        bindPose(height: height,
+                 shape: shape)
         
-        let mesh = mesh(build: build)
+        guard let mesh = try? mesh(height: height,
+                                   shape: shape,
+                                   color: .clear) else { return }
         
         self.geometry = SCNGeometry(mesh)
     }
@@ -135,49 +68,60 @@ public class Skeleton: SCNNode {
 
 extension Skeleton {
  
-    internal var bones: [SCNNode] { [self] + recursiveChildren }
+    internal var bones: [SCNNode] { recursiveChildren }
     internal var inverseBindTransforms: [NSValue] { bones.map { NSValue(scnMatrix4: $0.transform) } }
 }
 
 extension Skeleton {
     
-    internal func bindPose(build: Build) {
+    internal func bindPose(height: Skeleton.Height,
+                           shape: Skeleton.Shape) {
         
         position = SCNVector3(0.0, 0.0, 0.0)
         
-        hair.bindPose(build: build)
-        face.bindPose(build: build)
-        torso.bindPose(build: build)
-        hips.bindPose(build: build)
-        leftShoulder.bindPose(build: build)
-        rightShoulder.bindPose(build: build)
-        leftHip.bindPose(build: build)
-        rightHip.bindPose(build: build)
+        hair.bindPose(height: height,
+                      shape: shape)
+        face.bindPose(height: height,
+                      shape: shape)
+        torso.bindPose(height: height,
+                       shape: shape)
+        hips.bindPose(height: height,
+                      shape: shape)
+        leftShoulder.bindPose(height: height,
+                              shape: shape)
+        rightShoulder.bindPose(height: height,
+                               shape: shape)
+        leftHip.bindPose(height: height,
+                         shape: shape)
+        rightHip.bindPose(height: height,
+                          shape: shape)
     }
 }
 
 extension Skeleton {
     
-    internal func mesh(build: Build) -> Mesh {
+    func mesh(height: Skeleton.Height,
+              shape: Skeleton.Shape,
+              color: Color) throws -> Mesh {
         
         do {
             
-            return Mesh(submeshes: [try hair.mesh(build: build,
-                                                  color: .yellow),
-                                    try face.mesh(build: build,
-                                                  color: .magenta),
-                                    try torso.mesh(build: build,
-                                                   color: .blue),
-                                    try hips.mesh(build: build,
-                                                  color: .orange),
-                                    try leftShoulder.mesh(build: build,
-                                                          color: .red),
-                                    try rightShoulder.mesh(build: build,
-                                                           color: .red),
-                                    try leftHip.mesh(build: build,
-                                                     color: .blue),
-                                    try rightHip.mesh(build: build,
-                                                      color: .blue)])
+            let color = Color("FFB7B7")
+            
+            let nodes: [Meshable] = [hair,
+                                     face,
+                                     torso,
+                                     hips,
+                                     leftShoulder,
+                                     rightShoulder,
+                                     leftHip,
+                                     rightHip]
+            
+            let submeshes = try nodes.map { try $0.mesh(height: height,
+                                                        shape: shape,
+                                                        color: color) }
+            
+            return Mesh(submeshes: submeshes)
         }
         catch {
             
