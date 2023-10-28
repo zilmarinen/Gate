@@ -45,7 +45,5 @@ extension Skeleton {
             case .taperedUp: return 0.2
             }
         }
-        
-        internal var limbRadius: Double { 0.01 }        
     }
 }

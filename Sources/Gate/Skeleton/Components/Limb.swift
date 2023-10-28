@@ -98,24 +98,24 @@ extension Skeleton.Limb {
                        shape: Skeleton.Shape,
                        color: Color) throws -> Mesh {
         
-        guard let limb = LineSegment(start: Vector(extremity.worldPosition),
-                                     end: Vector(worldPosition)) else { throw MeshError.invalidLineSegment }
+        guard let limb = LineSegment(Vector(extremity.worldPosition),
+                                     Vector(worldPosition)) else { throw MeshError.invalidLineSegment }
         
         guard appendage == .arm,
-              let hand = LineSegment(start: Vector(ik.worldPosition),
-                                     end: Vector(extremity.worldPosition)) else {
+              let hand = LineSegment(Vector(ik.worldPosition),
+                                     Vector(extremity.worldPosition)) else {
             
             return try Mesh.cap(line: limb,
-                                radius: shape.limbRadius,
+                                radius: height.limbRadius,
                                 color: color)
         }
         
         let arm = try Mesh.cylinder(line: limb,
-                                    radius: shape.limbRadius,
+                                    radius: height.limbRadius,
                                     color: color)
         
         let manus = try Mesh.cap(line: hand,
-                                 radius: shape.limbRadius,
+                                 radius: height.limbRadius,
                                  color: .orange)
         
         return arm.union(manus)

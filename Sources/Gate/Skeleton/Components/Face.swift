@@ -38,8 +38,8 @@ extension Skeleton.Face {
                        shape: Skeleton.Shape,
                        color: Color) throws -> Mesh {
         
-        guard let line = LineSegment(start: Vector(worldPosition) - Vector(0.0, height.faceHeight, 0.0),
-                                     end: Vector(worldPosition)) else { throw MeshError.invalidLineSegment }
+        guard let line = LineSegment(Vector(worldPosition) - Vector(0.0, height.faceHeight, 0.0),
+                                     Vector(worldPosition)) else { throw MeshError.invalidLineSegment }
         
         return try Mesh.cylinder(line: line,
                                  radius: shape.upperRadius,

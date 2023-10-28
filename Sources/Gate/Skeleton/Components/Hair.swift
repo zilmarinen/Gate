@@ -38,8 +38,8 @@ extension Skeleton.Hair {
                        shape: Skeleton.Shape,
                        color: Color) throws -> Mesh {
         
-        guard let line = LineSegment(start: Vector(worldPosition),
-                                     end: Vector(worldPosition) - Vector(0.0, height.hairHeight, 0.0)) else { throw MeshError.invalidLineSegment }
+        guard let line = LineSegment(Vector(worldPosition),
+                                     Vector(worldPosition) - Vector(0.0, height.hairHeight, 0.0)) else { throw MeshError.invalidLineSegment }
         
         return try Mesh.cap(line: line,
                             radius: shape.upperRadius,

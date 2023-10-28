@@ -46,12 +46,22 @@ extension Skeleton {
             }
         }
         
+        internal var limbRadius: Double {
+            
+            switch self {
+                
+            case .small: return 0.02
+            case .medium: return 0.019
+            case .tall: return 0.018
+            }
+        }
+        
         internal var hairHeight: Double {
             
             switch self {
                 
-            case .small: return 0.05
-            case .medium: return 0.05
+            case .small: return 0.03
+            case .medium: return 0.04
             case .tall: return 0.05
             }
         }
@@ -70,8 +80,8 @@ extension Skeleton {
             
             switch self {
                 
-            case .small: return 0.1
-            case .medium: return 0.1
+            case .small: return 0.08
+            case .medium: return 0.09
             case .tall: return 0.1
             }
         }
@@ -80,8 +90,8 @@ extension Skeleton {
             
             switch self {
                 
-            case .small: return 0.05
-            case .medium: return 0.05
+            case .small: return 0.03
+            case .medium: return 0.04
             case .tall: return 0.05
             }
         }

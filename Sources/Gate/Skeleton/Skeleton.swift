@@ -13,6 +13,9 @@ public class Skeleton: SCNNode,
                        Bindable,
                        Meshable {
     
+    public static let `default` = Skeleton(height: .small,
+                                           shape: .cyclinder)
+    
     internal let hair = Hair()
     internal let face = Face()
     internal let torso = Torso()
@@ -56,11 +59,16 @@ public class Skeleton: SCNNode,
         bindPose(height: height,
                  shape: shape)
         
-        guard let mesh = try? mesh(height: height,
-                                   shape: shape,
-                                   color: .clear) else { return }
-        
-        self.geometry = SCNGeometry(mesh)
+//        guard let mesh = try? mesh(height: height,
+//                                   shape: shape,
+//                                   color: .clear) else { return }
+//
+//        let skinner = SCNSkinner(mesh: mesh,
+//                                 bones: bones,
+//                                 boneInverseBindTransforms: inverseBindTransforms)
+//
+//        self.skinner = skinner
+//        self.geometry = skinner.baseGeometry
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -69,7 +77,7 @@ public class Skeleton: SCNNode,
 extension Skeleton {
  
     internal var bones: [SCNNode] { recursiveChildren }
-    internal var inverseBindTransforms: [NSValue] { bones.map { NSValue(scnMatrix4: $0.transform) } }
+    internal var inverseBindTransforms: [NSValue] { bones.map { NSValue(scnMatrix4: SCNMatrix4Invert($0.worldTransform)) } }
 }
 
 extension Skeleton {
@@ -120,7 +128,7 @@ extension Skeleton {
             let submeshes = try nodes.map { try $0.mesh(height: height,
                                                         shape: shape,
                                                         color: color) }
-            
+
             return Mesh(submeshes: submeshes)
         }
         catch {

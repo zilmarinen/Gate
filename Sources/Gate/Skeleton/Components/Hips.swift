@@ -38,8 +38,8 @@ extension Skeleton.Hips {
                        shape: Skeleton.Shape,
                        color: Color) throws -> Mesh {
         
-        guard let line = LineSegment(start: Vector(worldPosition) - Vector(0.0, height.hipHeight, 0.0),
-                                     end: Vector(worldPosition)) else { throw MeshError.invalidLineSegment }
+        guard let line = LineSegment(Vector(worldPosition) - Vector(0.0, height.hipHeight, 0.0),
+                                     Vector(worldPosition)) else { throw MeshError.invalidLineSegment }
         
         return try Mesh.cap(line: line,
                             radius: shape.upperRadius,
