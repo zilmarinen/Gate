@@ -36,8 +36,8 @@ extension SCNNode {
         
             for child in childNodes {
                 
-                guard let line = LineSegment(start: .zero,
-                                             end: Vector(child.position)) else { continue }
+                guard let line = LineSegment(.zero,
+                                             Vector(child.position)) else { continue }
                 
                 mesh = mesh.union(try Mesh.bone(line: line,
                                                 color: .green))

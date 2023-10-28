@@ -65,7 +65,7 @@ class AppViewModel: ObservableObject {
     @Published var profile: Mesh.Profile = .init(polygonCount: 0,
                                                  vertexCount: 0)
     
-    internal let scene = Scene()
+    internal let scene = ViewerScene()
     
     private let operationQueue = OperationQueue()
     
@@ -124,11 +124,11 @@ extension AppViewModel {
         let skeleton = Skeleton(height: height,
                                 shape: shape)
         
-        try? skeleton.debug(showBones: showBones,
-                            showJoints: showJoints,
-                            showMesh: showMesh)
+        self.scene.avatar.skeleton = skeleton
         
-        self.scene.rootNode.addChildNode(skeleton)
+        try? self.scene.avatar.skeleton.debug(showBones: showBones,
+                                              showJoints: showJoints,
+                                              showMesh: showMesh)
         
 //        guard let cache,
 //              let mesh = cache.mesh(for: kite,

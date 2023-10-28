@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		180EBD1B2AE12A2C0070CAB0 /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180EBD1A2AE12A2C0070CAB0 /* Mesh.swift */; };
 		180EBD1D2AE12A750070CAB0 /* SCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180EBD1C2AE12A750070CAB0 /* SCNNode.swift */; };
+		181E4EFE2AE6B00700F27563 /* ViewerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E4EFD2AE6B00700F27563 /* ViewerScene.swift */; };
+		186821362AE94C90004C0B5F /* Pedestal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186821352AE94C90004C0B5F /* Pedestal.swift */; };
 		1874D5C52ADEAC0E00CA9F03 /* Gate_ViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874D5C42ADEAC0E00CA9F03 /* Gate_ViewerApp.swift */; };
 		1874D5C72ADEAC0E00CA9F03 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874D5C62ADEAC0E00CA9F03 /* AppView.swift */; };
 		1874D5C92ADEAC0F00CA9F03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1874D5C82ADEAC0F00CA9F03 /* Assets.xcassets */; };
-		1874D5CD2ADEAC0F00CA9F03 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1874D5CC2ADEAC0F00CA9F03 /* Preview Assets.xcassets */; };
 		1874D5D62ADEAC6400CA9F03 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874D5D52ADEAC6400CA9F03 /* AppViewModel.swift */; };
 		1874D5DB2ADEACF900CA9F03 /* Gate in Frameworks */ = {isa = PBXBuildFile; productRef = 1874D5DA2ADEACF900CA9F03 /* Gate */; };
 /* End PBXBuildFile section */
@@ -20,12 +21,14 @@
 /* Begin PBXFileReference section */
 		180EBD1A2AE12A2C0070CAB0 /* Mesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
 		180EBD1C2AE12A750070CAB0 /* SCNNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNNode.swift; sourceTree = "<group>"; };
+		181E4EFD2AE6B00700F27563 /* ViewerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerScene.swift; sourceTree = "<group>"; };
+		181E4EFF2AE916B700F27563 /* Gate-Viewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Gate-Viewer-Info.plist"; sourceTree = SOURCE_ROOT; };
+		186821352AE94C90004C0B5F /* Pedestal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pedestal.swift; sourceTree = "<group>"; };
 		1874D5C12ADEAC0E00CA9F03 /* Gate Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gate Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1874D5C42ADEAC0E00CA9F03 /* Gate_ViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gate_ViewerApp.swift; sourceTree = "<group>"; };
 		1874D5C62ADEAC0E00CA9F03 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		1874D5C82ADEAC0F00CA9F03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1874D5CA2ADEAC0F00CA9F03 /* Gate_Viewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gate_Viewer.entitlements; sourceTree = "<group>"; };
-		1874D5CC2ADEAC0F00CA9F03 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1874D5D52ADEAC6400CA9F03 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		1874D5D82ADEACDE00CA9F03 /* Gate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Gate; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,6 +54,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		181E4EFC2AE6AFF900F27563 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				181E4EFD2AE6B00700F27563 /* ViewerScene.swift */,
+				186821352AE94C90004C0B5F /* Pedestal.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
 		1874D5B82ADEAC0E00CA9F03 = {
 			isa = PBXGroup;
 			children = (
@@ -72,23 +84,16 @@
 		1874D5C32ADEAC0E00CA9F03 /* Gate Viewer */ = {
 			isa = PBXGroup;
 			children = (
+				181E4EFF2AE916B700F27563 /* Gate-Viewer-Info.plist */,
+				181E4EFC2AE6AFF900F27563 /* Scene */,
 				180EBD192AE12A230070CAB0 /* Extensions */,
 				1874D5C42ADEAC0E00CA9F03 /* Gate_ViewerApp.swift */,
 				1874D5D42ADEAC2300CA9F03 /* View Models */,
 				1874D5D32ADEAC1C00CA9F03 /* Views */,
 				1874D5C82ADEAC0F00CA9F03 /* Assets.xcassets */,
 				1874D5CA2ADEAC0F00CA9F03 /* Gate_Viewer.entitlements */,
-				1874D5CB2ADEAC0F00CA9F03 /* Preview Content */,
 			);
 			path = "Gate Viewer";
-			sourceTree = "<group>";
-		};
-		1874D5CB2ADEAC0F00CA9F03 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				1874D5CC2ADEAC0F00CA9F03 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		1874D5D32ADEAC1C00CA9F03 /* Views */ = {
@@ -183,7 +188,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1874D5CD2ADEAC0F00CA9F03 /* Preview Assets.xcassets in Resources */,
 				1874D5C92ADEAC0F00CA9F03 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +201,8 @@
 			files = (
 				1874D5C72ADEAC0E00CA9F03 /* AppView.swift in Sources */,
 				180EBD1D2AE12A750070CAB0 /* SCNNode.swift in Sources */,
+				186821362AE94C90004C0B5F /* Pedestal.swift in Sources */,
+				181E4EFE2AE6B00700F27563 /* ViewerScene.swift in Sources */,
 				1874D5C52ADEAC0E00CA9F03 /* Gate_ViewerApp.swift in Sources */,
 				180EBD1B2AE12A2C0070CAB0 /* Mesh.swift in Sources */,
 				1874D5D62ADEAC6400CA9F03 /* AppViewModel.swift in Sources */,
@@ -326,6 +332,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Gate Viewer/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Gate-Viewer-Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -362,6 +369,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Gate Viewer/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Gate-Viewer-Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

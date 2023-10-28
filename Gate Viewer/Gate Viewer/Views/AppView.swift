@@ -42,7 +42,9 @@ struct AppView: View {
         SceneView(scene: viewModel.scene,
                   pointOfView: viewModel.scene.camera.pov,
                   options: [.allowsCameraControl,
-                            .autoenablesDefaultLighting])
+                            .autoenablesDefaultLighting,
+                            .rendersContinuously],
+                  delegate: viewModel.scene)
         .toolbar {
             
             ToolbarItemGroup {
