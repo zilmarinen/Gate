@@ -5,11 +5,14 @@
 //
 
 import Bivouac
+import Dependencies
 import Gate
 import SceneKit
 import SwiftUI
 
 struct AppView: View {
+    
+    @Dependency(\.deviceManager) var deviceManager
     
     @ObservedObject private var viewModel = AppViewModel()
     
@@ -42,9 +45,9 @@ struct AppView: View {
         SceneView(scene: viewModel.scene,
                   pointOfView: viewModel.scene.camera.pov,
                   options: [.allowsCameraControl,
-                            .autoenablesDefaultLighting,
                             .rendersContinuously],
-                  delegate: viewModel.scene)
+                  delegate: viewModel.scene,
+                  technique: deviceManager.technique)
         .toolbar {
             
             ToolbarItemGroup {
@@ -56,26 +59,6 @@ struct AppView: View {
     
     @ViewBuilder
     var toolbar: some View {
-        
-        Picker("Height",
-               selection: $viewModel.height) {
-            
-            ForEach(Skeleton.Height.allCases, id: \.self) { height in
-                        
-                Text(height.id)
-                    .id(height)
-            }
-        }
-        
-        Picker("Shape",
-               selection: $viewModel.shape) {
-            
-            ForEach(Skeleton.Shape.allCases, id: \.self) { shape in
-                        
-                Text(shape.id)
-                    .id(shape)
-            }
-        }
         
         Menu {
                                 

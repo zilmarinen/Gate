@@ -6,19 +6,19 @@
 
 import Foundation
 
-public struct Spring {
+internal struct Spring {
     
-    let minimumLength: Double
-    let maximumLength: Double
+    internal let minimumLength: Double
+    internal let maximumLength: Double
     
-    public init(_ length: Double) {
+    internal  init(_ length: Double) {
         
         self.minimumLength = length
         self.maximumLength = length
     }
     
-    public init(_ minimumLength: Double,
-                _ maximumLength: Double) {
+    internal  init(_ minimumLength: Double,
+                   _ maximumLength: Double) {
         
         self.minimumLength = min(minimumLength, maximumLength)
         self.maximumLength = max(minimumLength, maximumLength)

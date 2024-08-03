@@ -1,12 +1,75 @@
 {
   "pins" : [
     {
+      "identity" : "combine-schedulers",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/combine-schedulers",
+      "state" : {
+        "revision" : "9fa31f4403da54855f1e2aeaeff478f4f0e40b13",
+        "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "euclid",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:nicklockwood/Euclid.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "5e5c9e61776f6f1fb6152ba2748cc6eff30c32bb"
+      }
+    },
+    {
       "identity" : "peakoperation",
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:3Squared/PeakOperation.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "35811e5f3dc539a185601c6b3d54e0a9f9481cb1"
+        "branch" : "master",
+        "revision" : "f5070818152d65d001455992c0b414727f8e19d4"
+      }
+    },
+    {
+      "identity" : "swift-clocks",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-clocks",
+      "state" : {
+        "revision" : "3581e280bf0d90c3fb9236fb23e75a5d8c46b533",
+        "version" : "1.0.4"
+      }
+    },
+    {
+      "identity" : "swift-concurrency-extras",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-concurrency-extras",
+      "state" : {
+        "revision" : "bb5059bde9022d69ac516803f4f227d8ac967f71",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "swift-dependencies",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pointfreeco/swift-dependencies.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "35472327beaecb8896492e691709b67b64fe2bd8"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-syntax",
+      "state" : {
+        "revision" : "06b5cdc432e93b60e3bdf53aff2857c6b312991a",
+        "version" : "600.0.0-prerelease-2024-07-30"
+      }
+    },
+    {
+      "identity" : "xctest-dynamic-overlay",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
+      "state" : {
+        "revision" : "357ca1e5dd31f613a1d43320870ebc219386a495",
+        "version" : "1.2.2"
       }
     }
   ],
