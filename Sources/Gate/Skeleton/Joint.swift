@@ -4,12 +4,21 @@
 //  Created by Zack Brown on 10/11/2023.
 //
 
+import Euclid
 import Foundation
 
 internal enum Joint: String,
                      CaseIterable,
                      Hashable,
                      Identifiable {
+    
+    internal static var effectors: [Joint] { [.headEffector,
+                                              .neckEffector,
+                                              .hipEffector,
+                                              .leftHandEffector,
+                                              .rightHandEffector,
+                                              .leftFootEffector,
+                                              .rightFootEffector] }
     
     case headEffector = "Head Effector",
          neckEffector = "Neck Effector",

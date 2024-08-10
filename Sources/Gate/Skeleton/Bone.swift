@@ -4,7 +4,9 @@
 //  Created by Zack Brown on 10/11/2023.
 //
 
+import Euclid
 import Foundation
+import SceneKit
 
 internal enum Bone: String,
                     CaseIterable,
@@ -34,48 +36,101 @@ internal enum Bone: String,
     internal var id: String { rawValue.capitalized }
 }
 
-import Bivouac
-import Euclid
-
-extension Mesh {
+extension Bone {
     
-    public static func bone(line: LineSegment,
-                            color: Color) throws -> Mesh {
-        
-        let steps = 4
-        let step = (.pi2 / Double(steps))
-        let radius = line.length * 0.05
-        let direction = line.direction
-        let base = line.start.lerp(line.end, 0.1)
-        let apex = line.end.lerp(line.start, 0.1)
-        let anchor = base.lerp(apex, 0.1)
-        let perpendicular = direction.perpendicular.normalized()
-        let binormal = direction.cross(perpendicular)
-        
-        var polygons: [Euclid.Polygon] = []
-        
-        for i in 0..<steps {
-            
-            let iStep = step * Double(i)
-            let jStep = step * Double((i + 1) % steps)
-            
-            let v0 = anchor + radius * perpendicular * cos(iStep) + radius * binormal * sin(iStep)
-            let v1 = anchor + radius * perpendicular * cos(jStep) + radius * binormal * sin(jStep)
-            
-            let top = Polygon.face([line.start,
-                                    v1,
-                                    v0],
-                                    color)
-            
-            let bottom = Polygon.face([v0,
-                                       v1,
-                                       line.end],
-                                       color)
-            
-            try polygons.append(top)
-            try polygons.append(bottom)
+    internal var start: Joint {
+
+        switch self {
+
+        case .head: return .neckEffector
+        case .neck: return .collarbone
+        case .leftClavicle: return .collarbone
+        case .rightClavicle: return .collarbone
+        case .leftArm: return .leftShoulder
+        case .rightArm: return .rightShoulder
+        case .leftForearm: return .leftElbow
+        case .rightForearm: return .rightElbow
+        case .leftHand: return .leftWrist
+        case .rightHand: return .rightWrist
+        case .spineUpper: return .chest
+        case .spineLower: return .hipEffector
+        case .leftHipbone: return .hipEffector
+        case .rightHipbone: return .hipEffector
+        case .leftThigh: return .leftHip
+        case .rightThigh: return .rightHip
+        case .leftShin: return .leftKnee
+        case .rightShin: return .rightKnee
+        case .leftFoot: return .leftHeel
+        case .rightFoot: return .rightHeel
         }
+    }
+
+    internal var end: Joint {
+
+        switch self {
+
+        case .head: return .headEffector
+        case .neck: return .neckEffector
+        case .leftClavicle: return .leftShoulder
+        case .rightClavicle: return .rightShoulder
+        case .leftArm: return .leftElbow
+        case .rightArm: return .rightElbow
+        case .leftForearm: return .leftWrist
+        case .rightForearm: return .rightWrist
+        case .leftHand: return .leftHandEffector
+        case .rightHand: return .rightHandEffector
+        case .spineUpper: return .collarbone
+        case .spineLower: return .chest
+        case .leftHipbone: return .leftHip
+        case .rightHipbone: return .rightHip
+        case .leftThigh: return .leftKnee
+        case .rightThigh: return .rightKnee
+        case .leftShin: return .leftHeel
+        case .rightShin: return .rightHeel
+        case .leftFoot: return .leftFootEffector
+        case .rightFoot: return .rightFootEffector
+        }
+    }
+}
+
+extension Bone {
+    
+    internal struct Influence {
         
-        return Mesh(polygons)
+        let indices: [UInt16]
+        let weights: [Float]
+    }
+    
+    /// SceneKit performs skeletal animation on the GPU only if the componentsPerVector count in this geometry source is 4 or less.
+    /// https://developer.apple.com/documentation/scenekit/scnskinner/1522986-boneweights
+    internal static let maximumBoneInfluenceContributions = 4
+    
+    internal static func influence(_ vector: Vector,
+                                   _ bones: [SCNNode]) -> Influence {
+        
+        let distances = bones.reduce(into: [SCNNode : Double](), { result, bone in
+            
+            result[bone] = (Vector(bone.position) - vector).length
+        })
+        
+        let sorted = distances.sorted { $0.value < $1.value }
+        
+        let nearest = sorted[0..<min(Self.maximumBoneInfluenceContributions, bones.count)]
+        let total = nearest.reduce(into: Double()) { $0 += $1.value }
+        let weight = 1.0 / total
+        
+        var indices: [UInt16] = []
+        var weights: [Float] = []
+        
+        for (key, value) in nearest {
+            
+            guard let index = bones.firstIndex(of: key) else { continue }
+            
+            indices.append(UInt16(index))
+            weights.append(Float(weight * value))
+        }
+            
+        return .init(indices: indices,
+                     weights: weights)
     }
 }

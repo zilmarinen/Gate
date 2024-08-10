@@ -48,6 +48,8 @@ class AppViewModel: ObservableObject {
     
     internal let scene = ModelViewScene()
     
+    internal let avatar = Avatar()
+    
     private let operationQueue = OperationQueue()
     
     init() {
@@ -83,6 +85,8 @@ extension AppViewModel {
         scene.clear()
         
         scene.render(surface: Grid.Triangle.zero.perimeter)
+        
+        scene.model = avatar
         
 //        guard let cache,
 //              let mesh = cache.mesh(for: kite,
