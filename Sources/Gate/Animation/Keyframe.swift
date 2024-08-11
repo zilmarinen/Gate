@@ -10,6 +10,12 @@ import Foundation
 internal struct Keyframe {
     
     internal let timestamp: TimeInterval
-    internal let bone: Bone
-    internal let transform: Transform
+    internal let poses: [Pose]
+}
+
+extension Keyframe {
+    
+    internal var joints: [Joint] { poses.map { $0.joint } }
+    
+    internal func pose(_ joint: Joint) -> Pose? { poses.first { $0.joint == joint } }
 }

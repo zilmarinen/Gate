@@ -110,7 +110,7 @@ extension Bone {
         
         let distances = bones.reduce(into: [SCNNode : Double](), { result, bone in
             
-            result[bone] = (Vector(bone.position) - vector).length
+            result[bone] = (Vector(bone.worldPosition) - vector).length
         })
         
         let sorted = distances.sorted { $0.value < $1.value }

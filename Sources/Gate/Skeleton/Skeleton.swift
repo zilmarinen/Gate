@@ -11,11 +11,6 @@ import SceneKit
 
 internal class Skeleton: SCNNode {
     
-    internal enum Build {
-        
-        
-    }
-    
     internal enum Height: String,
                           CaseIterable,
                           Identifiable {
@@ -30,27 +25,26 @@ internal class Skeleton: SCNNode {
             
             switch self {
                 
-            case .short: return 0.75
+            case .short: return 0.9
             case .medium: return 1.0
-            case .tall: return 1.25
+            case .tall: return 1.1
             }
         }
     }
     
     internal let height: Height
+    internal let joints: [SCNNode]
     
     internal var rootNode: Joint { .hipEffector }
     
     internal var boneStructure: [Bone] { Bone.allCases }
+    internal var controlPoints: [Joint] { Joint.allCases }
     
     internal var effectors: [Joint] { Joint.effectors }
     
-    internal var joints: [Joint] { Joint.allCases }
-    
-    internal var bones: [SCNNode] { recursiveChildren }
-    internal var inverseBindTransforms: [NSValue] { bones.map { NSValue(scnMatrix4: SCNMatrix4Invert($0.worldTransform)) } }
+    internal var inverseBindTransforms: [NSValue] { joints.map { NSValue(scnMatrix4: SCNMatrix4Invert($0.worldTransform)) } }
 
-    internal var tPose: [Joint : Transform] {
+    internal lazy var tPose: [Joint : Transform] = {
         // hips, spine, neck and head
         [.hipEffector : .offset(Vector.up * (spring(.leftShin).maximumLength +
                                              spring(.leftThigh).maximumLength)),
@@ -83,11 +77,12 @@ internal class Skeleton: SCNNode {
          .rightKnee : .offset(-Vector.up * spring(.rightThigh).maximumLength),
          .rightHeel : .offset(-Vector.up * spring(.rightShin).maximumLength),
          .rightFootEffector : .offset(Vector.forward * spring(.rightFoot).maximumLength)]
-    }
+    }()
     
     internal required init(_ height: Height) {
         
         self.height = height
+        self.joints = Joint.allCases.map { SCNNode($0.id) }
         
         super.init()
         
@@ -99,14 +94,13 @@ internal class Skeleton: SCNNode {
 
 extension Skeleton {
     
-    internal func childNode(_ joint: Joint) -> SCNNode? { childNode(withName: joint.id,
-                                                                    recursively: true) }
+    internal func joint(_ joint: Joint) -> SCNNode? { joints.first { $0.name == joint.id } }
     
     internal func spring(_ bone: Bone) -> Spring {
         
         switch bone {
             
-        case .head: return .init(0.1 * height.scale)
+        case .head: return .init(0.07 * height.scale)
         case .neck: return .init(0.02 * height.scale)
         case .leftClavicle,
              .rightClavicle: return .init(0.07 * height.scale)
@@ -116,8 +110,8 @@ extension Skeleton {
              .rightForearm: return .init(0.1 * height.scale)
         case .leftHand,
                 .rightHand: return .init(0.02 * height.scale)
-        case .spineUpper: return .init(0.14 * height.scale)
-        case .spineLower: return .init(0.14 * height.scale)
+        case .spineUpper: return .init(0.07 * height.scale)
+        case .spineLower: return .init(0.03 * height.scale)
         case .leftHipbone,
              .rightHipbone: return .init(0.04 * height.scale)
         case .leftThigh,
@@ -142,8 +136,8 @@ extension Skeleton {
             let end = bone.end
             let spring = spring(bone)
             
-            let startNode = childNode(start) ?? SCNNode(start.id)
-            let endNode = childNode(end) ?? SCNNode(end.id)
+            guard let startNode = joint(start),
+                  let endNode = joint(end) else { fatalError("Missing skeleton joint for bone: \(bone.id)") }
             
             let constraint = SCNDistanceConstraint(target: startNode)
             
@@ -164,11 +158,9 @@ extension Skeleton {
         
         for joint in joints {
             
-            guard let node = childNode(joint) else { continue }
-            
             var mesh = Mesh([])
             
-            for child in node.childNodes {
+            for child in joint.childNodes {
                 
                 guard let lineSegment = LineSegment(start: .zero,
                                                     end: Vector(child.position)),
@@ -182,7 +174,7 @@ extension Skeleton {
                 mesh = mesh.merge(bone.merge(socket))
             }
             
-            node.addChildNode(SCNNode(mesh: mesh))
+            joint.addChildNode(SCNNode(mesh: mesh))
         }
     }
 }

@@ -8,13 +8,35 @@ import Euclid
 
 extension Mesh {
     
-    internal static func head() -> Mesh { Mesh.cube(size: Vector(size: 0.01)) }
+    internal static func head() -> Mesh { Mesh([]) }
     
-    internal static func torso() -> Mesh { Mesh([]) }
+    internal static func torso(_ height: Double) -> Mesh {
+        
+        let v0 = Vector(0.05, 0.0, 0.015)
+        let v1 = Vector(-0.05, 0.0, 0.015)
+        let v2 = Vector(-0.05, 0.0, -0.015)
+        let v3 = Vector(0.05, 0.0, -0.015)
+        
+        return Mesh.wrap([v3, v2, v1, v0],
+                         nil,
+                         .yellow,
+                         height)
+    }
     
-    internal static func pelvis() -> Mesh { Mesh([]) }
+    internal static func pelvis(_ height: Double) -> Mesh {
+        
+        let v0 = Vector(0.05, 0.0, 0.01)
+        let v1 = Vector(-0.05, 0.0, 0.01)
+        let v2 = Vector(-0.05, 0.0, -0.01)
+        let v3 = Vector(0.05, 0.0, -0.01)
+        
+        return Mesh.wrap([v3, v2, v1, v0],
+                         nil,
+                         .blue,
+                         height)
+    }
     
-    internal static func arm() -> Mesh { Mesh([]) }
+    internal static func arm(_ length: Double) -> Mesh { Mesh([]) }
     
     internal static func leg(_ length: Double) -> Mesh {
         

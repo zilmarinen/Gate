@@ -25,7 +25,7 @@ public class Avatar: SCNNode,
         let mesh = skin.mesh
         
         skinner = SCNSkinner(mesh: mesh,
-                             bones: skeleton.bones,
+                             bones: skeleton.joints,
                              boneInverseBindTransforms: skeleton.inverseBindTransforms)
         
         geometry = skinner?.baseGeometry

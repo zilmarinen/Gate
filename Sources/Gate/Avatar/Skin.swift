@@ -24,16 +24,21 @@ extension Skin {
     
     internal var mesh: Mesh {
         
-        guard let leftFoot = skeleton.childNode(.leftHeel),
-              let rightFoot = skeleton.childNode(.rightHeel) else { return Mesh([]) }
+        guard let leftFoot = skeleton.joint(.leftHeel),
+              let rightFoot = skeleton.joint(.rightHeel),
+              let hip = skeleton.joint(.hipEffector),
+              let chest = skeleton.joint(.chest) else { return Mesh([]) }
+        
+        let legLength = skeleton.spring(.leftShin).maximumLength + skeleton.spring(.leftThigh).maximumLength
+        let torsoHeight = skeleton.spring(.spineUpper).maximumLength + skeleton.spring(.neck).maximumLength
         
         let head = Mesh.head()
-        let torso = Mesh.torso()
-        let pelvis = Mesh.pelvis()
-        let leftArm = Mesh.arm()
-        let rightArm = Mesh.arm()
-        let leftLeg = Mesh.leg(0.2).translated(by: Vector(leftFoot.worldPosition))
-        let rightLeg = Mesh.leg(0.2).translated(by: Vector(rightFoot.worldPosition))
+        let torso = Mesh.torso(torsoHeight).translated(by: Vector(chest.worldPosition))
+        let pelvis = Mesh.pelvis(skeleton.spring(.spineLower).maximumLength).translated(by: Vector(hip.worldPosition))
+        let leftArm = Mesh.arm(0.2)
+        let rightArm = Mesh.arm(0.2)
+        let leftLeg = Mesh.leg(legLength).translated(by: Vector(leftFoot.worldPosition))
+        let rightLeg = Mesh.leg(legLength).translated(by: Vector(rightFoot.worldPosition))
         
         return head.merge(
                torso.merge(
