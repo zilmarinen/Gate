@@ -31,8 +31,8 @@ internal class Marionette: SCNNode,
                                poses: [.init(.leftKnee,
                                              .offset(Vector(0.0, 0.1, 0.1)))])]
         
-//        self.animation = Animation(frames,
-//                                   true)
+        self.animation = Animation(frames,
+                                   true)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -58,7 +58,7 @@ extension Marionette {
                   let nextFrame = animation.nextFrame(joint),
                   let nextPose = nextFrame.pose(joint) else {
                 
-                node.transform = SCNMatrix4(tPose)
+                //node.transform = SCNMatrix4(tPose)
                 
                 continue
             }
@@ -70,7 +70,7 @@ extension Marionette {
             let playhead = animation.playhead - previousFrame.timestamp
             let interpolator = (1.0 / duration) * playhead
             
-            node.transform = SCNMatrix4(previousTransform.lerp(nextTransform, interpolator))
+            //node.transform = SCNMatrix4(previousTransform.lerp(nextTransform, interpolator))
         }
     }
 }

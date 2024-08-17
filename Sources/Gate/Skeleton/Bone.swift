@@ -39,9 +39,9 @@ internal enum Bone: String,
 extension Bone {
     
     internal var start: Joint {
-
+        
         switch self {
-
+            
         case .head: return .neckEffector
         case .neck: return .collarbone
         case .leftClavicle: return .collarbone
@@ -64,11 +64,11 @@ extension Bone {
         case .rightFoot: return .rightHeel
         }
     }
-
+    
     internal var end: Joint {
-
+        
         switch self {
-
+            
         case .head: return .headEffector
         case .neck: return .neckEffector
         case .leftClavicle: return .leftShoulder
@@ -89,6 +89,42 @@ extension Bone {
         case .rightShin: return .rightHeel
         case .leftFoot: return .leftFootEffector
         case .rightFoot: return .rightFootEffector
+        }
+    }
+}
+
+extension Bone {
+    
+    internal enum Constant {
+        
+        static let height = 1.0
+        static let ratio = 0.3333333333 // 1.0 / 3.0
+    }
+    
+    internal var spring: Spring {
+        
+        switch self {
+            
+        case .head: return .init(0.07)
+        case .neck: return .init(0.02)
+        case .leftClavicle,
+             .rightClavicle: return .init(0.07)
+        case .leftArm,
+             .rightArm: return .init(0.1)
+        case .leftForearm,
+             .rightForearm: return .init(0.1)
+        case .leftHand,
+                .rightHand: return .init(0.02)
+        case .spineUpper: return .init(0.07)
+        case .spineLower: return .init(0.03)
+        case .leftHipbone,
+             .rightHipbone: return .init(0.04)
+        case .leftThigh,
+                .rightThigh: return .init(0.1)
+        case .leftShin,
+                .rightShin: return .init(0.1)
+        case .leftFoot,
+                .rightFoot: return .init(0.02)
         }
     }
 }

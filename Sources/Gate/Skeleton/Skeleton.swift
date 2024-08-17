@@ -11,28 +11,6 @@ import SceneKit
 
 internal class Skeleton: SCNNode {
     
-    internal enum Height: String,
-                          CaseIterable,
-                          Identifiable {
-        
-        case short
-        case medium
-        case tall
-        
-        internal var id: String { rawValue.capitalized }
-        
-        internal var scale: Double {
-            
-            switch self {
-                
-            case .short: return 0.9
-            case .medium: return 1.0
-            case .tall: return 1.1
-            }
-        }
-    }
-    
-    internal let height: Height
     internal let joints: [SCNNode]
     
     internal var rootNode: Joint { .hipEffector }
@@ -46,42 +24,41 @@ internal class Skeleton: SCNNode {
 
     internal lazy var tPose: [Joint : Transform] = {
         // hips, spine, neck and head
-        [.hipEffector : .offset(Vector.up * (spring(.leftShin).maximumLength +
-                                             spring(.leftThigh).maximumLength)),
-         .chest : .offset(Vector.up * spring(.spineLower).maximumLength),
-         .collarbone : .offset(Vector.up * spring(.spineUpper).maximumLength),
-         .neckEffector : .offset(Vector.up * spring(.neck).maximumLength),
-         .headEffector : .offset(Vector.up * spring(.head).maximumLength),
+        [.hipEffector : .offset(Vector.up * (Bone.leftShin.spring.maximumLength +
+                                             Bone.leftThigh.spring.maximumLength)),
+         .chest : .offset(Vector.up * Bone.spineLower.spring.maximumLength),
+         .collarbone : .offset(Vector.up * Bone.spineUpper.spring.maximumLength),
+         .neckEffector : .offset(Vector.up * Bone.neck.spring.maximumLength),
+         .headEffector : .offset(Vector.up * Bone.head.spring.maximumLength),
 
          //left arm
-         .leftShoulder : Transform(offset: -Vector.right * spring(.leftClavicle).maximumLength,
+         .leftShoulder : Transform(offset: -Vector.right * Bone.leftClavicle.spring.maximumLength,
                                    rotation: .yaw(.radians(.pi))),
-         .leftElbow : .offset(Vector.right * spring(.leftArm).maximumLength),
-         .leftWrist : .offset(Vector.right * spring(.leftForearm).maximumLength),
-         .leftHandEffector : .offset(Vector.right * spring(.leftHand).maximumLength),
+         .leftElbow : .offset(Vector.right * Bone.leftArm.spring.maximumLength),
+         .leftWrist : .offset(Vector.right * Bone.leftForearm.spring.maximumLength),
+         .leftHandEffector : .offset(Vector.right * Bone.leftHand.spring.maximumLength),
 
          //right arm
-         .rightShoulder : .offset(Vector.right * spring(.rightClavicle).maximumLength),
-         .rightElbow : .offset(Vector.right * spring(.rightArm).maximumLength),
-         .rightWrist : .offset(Vector.right * spring(.rightForearm).maximumLength),
-         .rightHandEffector : .offset(Vector.right * spring(.rightHand).maximumLength),
+         .rightShoulder : .offset(Vector.right * Bone.rightClavicle.spring.maximumLength),
+         .rightElbow : .offset(Vector.right * Bone.rightArm.spring.maximumLength),
+         .rightWrist : .offset(Vector.right * Bone.rightForearm.spring.maximumLength),
+         .rightHandEffector : .offset(Vector.right * Bone.rightHand.spring.maximumLength),
 
          //left leg
-         .leftHip : .offset(-Vector.right * spring(.leftHipbone).maximumLength),
-         .leftKnee : .offset(-Vector.up * spring(.leftThigh).maximumLength),
-         .leftHeel : .offset(-Vector.up * spring(.leftShin).maximumLength),
-         .leftFootEffector : .offset(Vector.forward * spring(.leftFoot).maximumLength),
+         .leftHip : .offset(-Vector.right * Bone.leftHipbone.spring.maximumLength),
+         .leftKnee : .offset(-Vector.up * Bone.leftThigh.spring.maximumLength),
+         .leftHeel : .offset(-Vector.up * Bone.leftShin.spring.maximumLength),
+         .leftFootEffector : .offset(Vector.forward * Bone.leftFoot.spring.maximumLength),
 
          //right leg
-         .rightHip : .offset(Vector.right * spring(.rightHipbone).maximumLength),
-         .rightKnee : .offset(-Vector.up * spring(.rightThigh).maximumLength),
-         .rightHeel : .offset(-Vector.up * spring(.rightShin).maximumLength),
-         .rightFootEffector : .offset(Vector.forward * spring(.rightFoot).maximumLength)]
+         .rightHip : .offset(Vector.right * Bone.rightHipbone.spring.maximumLength),
+         .rightKnee : .offset(-Vector.up * Bone.rightThigh.spring.maximumLength),
+         .rightHeel : .offset(-Vector.up * Bone.rightShin.spring.maximumLength),
+         .rightFootEffector : .offset(Vector.forward * Bone.rightFoot.spring.maximumLength)]
     }()
     
-    internal required init(_ height: Height) {
+    internal required override init() {
         
-        self.height = height
         self.joints = Joint.allCases.map { SCNNode($0.id) }
         
         super.init()
@@ -95,33 +72,6 @@ internal class Skeleton: SCNNode {
 extension Skeleton {
     
     internal func joint(_ joint: Joint) -> SCNNode? { joints.first { $0.name == joint.id } }
-    
-    internal func spring(_ bone: Bone) -> Spring {
-        
-        switch bone {
-            
-        case .head: return .init(0.07 * height.scale)
-        case .neck: return .init(0.02 * height.scale)
-        case .leftClavicle,
-             .rightClavicle: return .init(0.07 * height.scale)
-        case .leftArm,
-             .rightArm: return .init(0.1 * height.scale)
-        case .leftForearm,
-             .rightForearm: return .init(0.1 * height.scale)
-        case .leftHand,
-                .rightHand: return .init(0.02 * height.scale)
-        case .spineUpper: return .init(0.07 * height.scale)
-        case .spineLower: return .init(0.03 * height.scale)
-        case .leftHipbone,
-             .rightHipbone: return .init(0.04 * height.scale)
-        case .leftThigh,
-                .rightThigh: return .init(0.1 * height.scale)
-        case .leftShin,
-                .rightShin: return .init(0.1 * height.scale)
-        case .leftFoot,
-                .rightFoot: return .init(0.02 * height.scale)
-        }
-    }
 }
 
 extension Skeleton {
@@ -134,7 +84,7 @@ extension Skeleton {
             
             let start = bone.start
             let end = bone.end
-            let spring = spring(bone)
+            let spring = bone.spring
             
             guard let startNode = joint(start),
                   let endNode = joint(end) else { fatalError("Missing skeleton joint for bone: \(bone.id)") }

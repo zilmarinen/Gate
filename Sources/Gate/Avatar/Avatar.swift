@@ -11,7 +11,7 @@ import SceneKit
 public class Avatar: SCNNode,
                      Updatable {
     
-    internal let skeleton = Skeleton(.medium)
+    internal let skeleton = Skeleton()
     
     internal lazy var marionette = Marionette(skeleton)
     internal lazy var skin = Skin(skeleton)
@@ -29,6 +29,7 @@ public class Avatar: SCNNode,
                              boneInverseBindTransforms: skeleton.inverseBindTransforms)
         
         geometry = skinner?.baseGeometry
+        geometry?.program = Program(function: .geometry)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

@@ -15,7 +15,7 @@
       "location" : "git@github.com:nicklockwood/Euclid.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "5e5c9e61776f6f1fb6152ba2748cc6eff30c32bb"
+        "revision" : "eee79b3c758076e7d2c2213b293e2d03c184fa22"
       }
     },
     {
@@ -51,7 +51,7 @@
       "location" : "git@github.com:pointfreeco/swift-dependencies.git",
       "state" : {
         "branch" : "main",
-        "revision" : "35472327beaecb8896492e691709b67b64fe2bd8"
+        "revision" : "d7472be6b3c89251ce4c0db07d32405b43426781"
       }
     },
     {
