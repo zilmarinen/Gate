@@ -30,10 +30,15 @@ internal enum Bone: String,
          rightThigh = "Right Thigh",
          leftShin = "Left Shin",
          rightShin = "Right Shin",
-         leftFoot = "Left Foot",
-         rightFoot = "Right Foot"
+         leftHindfoot = "Left Hindfoot",
+         rightHindfoot = "Right Hindfoot",
+         leftForefoot = "Left Forefoot",
+         rightForefoot = "Right Forefoot"
     
     internal var id: String { rawValue.capitalized }
+    
+    internal var minimumLength: Double { spring.minimumLength }
+    internal var maximumLength: Double { spring.maximumLength * 10.0 }
 }
 
 extension Bone {
@@ -60,8 +65,10 @@ extension Bone {
         case .rightThigh: return .rightHip
         case .leftShin: return .leftKnee
         case .rightShin: return .rightKnee
-        case .leftFoot: return .leftHeel
-        case .rightFoot: return .rightHeel
+        case .leftHindfoot: return .leftHeel
+        case .rightHindfoot: return .rightHeel
+        case .leftForefoot: return .leftMidfoot
+        case .rightForefoot: return .rightMidfoot
         }
     }
     
@@ -87,8 +94,10 @@ extension Bone {
         case .rightThigh: return .rightKnee
         case .leftShin: return .leftHeel
         case .rightShin: return .rightHeel
-        case .leftFoot: return .leftFootEffector
-        case .rightFoot: return .rightFootEffector
+        case .leftHindfoot: return .leftMidfoot
+        case .rightHindfoot: return .rightMidfoot
+        case .leftForefoot: return .leftFootEffector
+        case .rightForefoot: return .rightFootEffector
         }
     }
 }
@@ -118,13 +127,15 @@ extension Bone {
         case .spineUpper: return .init(0.07)
         case .spineLower: return .init(0.03)
         case .leftHipbone,
-             .rightHipbone: return .init(0.04)
+             .rightHipbone: return .init(0.02)
         case .leftThigh,
                 .rightThigh: return .init(0.1)
         case .leftShin,
                 .rightShin: return .init(0.1)
-        case .leftFoot,
-                .rightFoot: return .init(0.02)
+        case .leftHindfoot,
+             .rightHindfoot: return .init(0.02)
+        case .leftForefoot,
+             .rightForefoot: return .init(0.01)
         }
     }
 }

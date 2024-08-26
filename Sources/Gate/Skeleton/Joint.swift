@@ -41,7 +41,9 @@ internal enum Joint: String,
          leftKnee = "Left Knee",
          rightKnee = "Right Knee",
          leftHeel = "Left Heel",
-         rightHeel = "Right Heel"
+         rightHeel = "Right Heel",
+         leftMidfoot = "Left Midfoot",
+         rightMidfoot = "Right Midfoot"
     
     internal var id: String { rawValue.capitalized }
 }
