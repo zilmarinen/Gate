@@ -5,6 +5,7 @@
 //
 
 import Bivouac
+import Euclid
 import Foundation
 import SceneKit
 
@@ -30,6 +31,8 @@ public class Avatar: SCNNode,
         
         geometry = skinner?.baseGeometry
         geometry?.program = Program(function: .geometry)
+        
+        marionette.geometry = SCNGeometry(wireframe: mesh)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

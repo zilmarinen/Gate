@@ -26,32 +26,90 @@ extension Skin {
         
         do {
             
-            guard let leftFoot = skeleton.joint(.leftHeel),
-                  let rightFoot = skeleton.joint(.rightHeel),
-                  let hip = skeleton.joint(.hipEffector),
-                  let chest = skeleton.joint(.chest),
-                  let neck = skeleton.joint(.neckEffector) else { throw MeshError.invalidPolygon }
+            let mesh = try head().union(torso().union(legs()))
+            let mirror = mesh.reflect(along: .yz)
             
-            let legLength = Bone.leftShin.spring.maximumLength + Bone.leftThigh.spring.maximumLength
-            let torsoHeight = Bone.spineUpper.spring.maximumLength + Bone.neck.spring.maximumLength
-            let pelvisHeight = Bone.spineLower.spring.maximumLength
-            
-            let head = try Mesh.head().translated(by: Vector(neck.worldPosition))
-            let torso = Mesh.torso(torsoHeight).translated(by: Vector(chest.worldPosition))
-            let pelvis = Mesh.pelvis(pelvisHeight).translated(by: Vector(hip.worldPosition))
-            let leftArm = Mesh.arm(0.2)
-            let rightArm = Mesh.arm(0.2)
-            let leftLeg = Mesh.leg(legLength).translated(by: Vector(leftFoot.worldPosition))
-            let rightLeg = Mesh.leg(legLength).translated(by: Vector(rightFoot.worldPosition))
-            
-            return head.merge(
-                torso.merge(
-                    pelvis.merge(
-                        leftArm.merge(
-                            rightArm.merge(
-                                leftLeg.merge(
-                                    rightLeg))))))
+            return mesh.merge(mirror)
         }
         catch { fatalError(error.localizedDescription) }
     }
+    
+    internal func head() throws -> Mesh {
+        return Mesh([])
+//        let headHeight = skeleton.headHeight
+//        let size = Vector(headHeight / 1.5,
+//                          headHeight,
+//                          headHeight / 2.0)
+//        
+//        return try Mesh.head(size).translated(by: skeleton.position(.neckEffector))
+    }
+    
+    internal func torso() throws -> Mesh {
+        return Mesh([])
+//        let torsoHeight = skeleton.torsoHeight
+//        let armLength = skeleton.armLength
+//        
+//        let torso = try Mesh.torso(torsoHeight).translated(by: skeleton.position(.chest))
+//        
+//        return Mesh([])
+    }
+    
+    internal func legs() throws -> Mesh {
+        
+        let pelvis = Mesh.pelvisProfile()
+        let ankle = Mesh.ankleProfile()
+        let neck = skeleton.position(.collarbone)
+        let hip = skeleton.position(.rightHip)
+        let heel = skeleton.position(.rightHeel)
+        let normal = neck - hip
+        
+        guard let plane = Plane(normal: normal,
+                                pointOnPlane: hip) else { throw MeshError.invalidPlane }
+
+        let leg = try Mesh.leg(pelvis,
+                               ankle,
+                               plane).translated(by: heel)
+        let foot = try Mesh.foot(ankle).translated(by: heel)
+        
+        return leg.union(foot)
+    }
 }
+
+extension Polygon {
+    
+    func reflect(along plane: Plane) -> Self {
+        
+        mapVertices { vertex in
+            
+            let projected = vertex.position.project(onto: plane)
+            
+            let distance = vertex.position - projected
+            
+            return Vertex(projected - distance,
+                          vertex.normal,
+                          vertex.texcoord,
+                          vertex.color)
+        }.inverted()
+    }
+}
+
+extension Mesh {
+    
+    func reflect(along plane: Plane) -> Self { Self(polygons.map { $0.reflect(along: plane) }) }
+}
+
+/*
+ 
+        // create a plane object representing the Plane
+         var plane = new Plane(-Plane.forward, Plane.position);
+
+         // get the closest point on the plane for the Source position
+         var mirrorPoint = plane.ClosestPointOnPlane(Source.position);
+
+         // get the position of Source relative to the mirrorPoint
+         var distance = Source.position - mirrorPoint;
+
+         // Move from the mirrorPoint the same vector but inverted
+         transform.position = mirrorPoint - distance;
+ 
+ */

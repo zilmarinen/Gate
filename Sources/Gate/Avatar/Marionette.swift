@@ -26,10 +26,10 @@ internal class Marionette: SCNNode,
         
         let frames = [Keyframe(timestamp: 0,
                                poses: [.init(.leftKnee,
-                                             .offset(.zero))]),
+                                             .rotation(.identity))]),
                       Keyframe(timestamp: 2,
                                poses: [.init(.leftKnee,
-                                             .offset(Vector(0.0, 0.1, 0.1)))])]
+                                             .rotation(.pitch(.halfPi)))])]
         
         self.animation = Animation(frames,
                                    true)
