@@ -20,8 +20,10 @@ internal enum Bone: String,
          rightArm = "Right Arm",
          leftForearm = "Left Forearm",
          rightForearm = "Right Forearm",
-         leftHand = "Left Hand",
-         rightHand = "Right Hand",
+         leftPalm = "Left Palm",
+         rightPalm = "Right Palm",
+         leftFingers = "Left Fingers",
+         rightFingers = "Right Fingers",
          spineUpper = "Spine Upper",
          spineLower = "Spine Lower",
          leftHipbone = "Left Hipbone",
@@ -55,8 +57,10 @@ extension Bone {
         case .rightArm: return .rightShoulder
         case .leftForearm: return .leftElbow
         case .rightForearm: return .rightElbow
-        case .leftHand: return .leftWrist
-        case .rightHand: return .rightWrist
+        case .leftPalm: return .leftWrist
+        case .rightPalm: return .rightWrist
+        case .leftFingers: return .leftKnuckles
+        case .rightFingers: return .rightKnuckles
         case .spineUpper: return .chest
         case .spineLower: return .hipEffector
         case .leftHipbone: return .hipEffector
@@ -84,8 +88,10 @@ extension Bone {
         case .rightArm: return .rightElbow
         case .leftForearm: return .leftWrist
         case .rightForearm: return .rightWrist
-        case .leftHand: return .leftHandEffector
-        case .rightHand: return .rightHandEffector
+        case .leftPalm: return .leftKnuckles
+        case .rightPalm: return .rightKnuckles
+        case .leftFingers: return .leftHandEffector
+        case .rightFingers: return .rightHandEffector
         case .spineUpper: return .collarbone
         case .spineLower: return .chest
         case .leftHipbone: return .leftHip
@@ -122,16 +128,18 @@ extension Bone {
              .rightArm: return .init(0.1)
         case .leftForearm,
              .rightForearm: return .init(0.1)
-        case .leftHand,
-                .rightHand: return .init(0.02)
+        case .leftPalm,
+             .rightPalm: return .init(0.02)
+        case .leftFingers,
+             .rightFingers: return .init(0.01)
         case .spineUpper: return .init(0.07)
         case .spineLower: return .init(0.03)
         case .leftHipbone,
              .rightHipbone: return .init(0.02)
         case .leftThigh,
-                .rightThigh: return .init(0.1)
+             .rightThigh: return .init(0.1)
         case .leftShin,
-                .rightShin: return .init(0.1)
+             .rightShin: return .init(0.1)
         case .leftHindfoot,
              .rightHindfoot: return .init(0.02)
         case .leftForefoot,

@@ -25,7 +25,7 @@ internal class Skeleton: SCNNode {
     internal lazy var tPose: [Joint : Transform] = {
         // hips, spine, neck and head
         [.hipEffector : .offset(Vector.unitY * (Bone.leftShin.maximumLength +
-                                             Bone.leftThigh.maximumLength)),
+                                                Bone.leftThigh.maximumLength)),
          .chest : .offset(Vector.unitY * Bone.spineLower.maximumLength),
          .collarbone : .offset(Vector.unitY * Bone.spineUpper.maximumLength),
          .neckEffector : .offset(Vector.unitY * Bone.neck.maximumLength),
@@ -35,14 +35,16 @@ internal class Skeleton: SCNNode {
          .leftShoulder : .offset(Vector.unitX * Bone.leftClavicle.maximumLength),
          .leftElbow : .offset(Vector.unitX * Bone.leftArm.maximumLength),
          .leftWrist : .offset(Vector.unitX * Bone.leftForearm.maximumLength),
-         .leftHandEffector : .offset(Vector.unitX * Bone.leftHand.maximumLength),
+         .leftKnuckles: .offset(Vector.unitX * Bone.leftPalm.maximumLength),
+         .leftHandEffector : .offset(Vector.unitX * Bone.leftFingers.maximumLength),
 
          //right arm
          .rightShoulder : Transform(offset: -Vector.unitX * Bone.rightClavicle.maximumLength,
                                     rotation: .yaw(.radians(.pi))),
          .rightElbow : .offset(Vector.unitX * Bone.rightArm.maximumLength),
          .rightWrist : .offset(Vector.unitX * Bone.rightForearm.maximumLength),
-         .rightHandEffector : .offset(Vector.unitX * Bone.rightHand.maximumLength),
+         .rightKnuckles: .offset(Vector.unitX * Bone.rightPalm.maximumLength),
+         .rightHandEffector : .offset(Vector.unitX * Bone.rightFingers.maximumLength),
 
          //left leg
          .leftHip : .offset(Vector.unitX * Bone.leftHipbone.maximumLength),
@@ -126,7 +128,7 @@ extension Skeleton {
                                                 color: .black) else { continue }
                 
                 let socket = Mesh.cube(center: .zero,
-                                       size: Vector(size: 0.01),
+                                       size: Vector(size: 0.05),
                                        material: Color.red)
                 
                 mesh = mesh.merge(bone.merge(socket))

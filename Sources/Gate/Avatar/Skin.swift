@@ -56,15 +56,18 @@ extension Skin {
     
     internal func legs() throws -> Mesh {
         
-        let pelvis = Mesh.pelvisProfile()
-        let ankle = Mesh.ankleProfile()
+        let pelvis = Mesh.Pelvis()
+        let ankle = Mesh.Ankle()
         let neck = skeleton.position(.collarbone)
         let hip = skeleton.position(.rightHip)
         let heel = skeleton.position(.rightHeel)
         let normal = neck - hip
+        let pointOnPlane = hip - Vector(0.0,
+                                        Mesh.Constant.hipLength,
+                                        0.0)
         
         guard let plane = Plane(normal: normal,
-                                pointOnPlane: hip) else { throw MeshError.invalidPlane }
+                                pointOnPlane: pointOnPlane) else { throw MeshError.invalidPlane }
 
         let leg = try Mesh.leg(pelvis,
                                ankle,
